@@ -1,5 +1,6 @@
 package mmazurkiewicz.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import mmazurkiewicz.domain.*;
 import mmazurkiewicz.repositories.CategoryRepository;
 import mmazurkiewicz.repositories.RecipeRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private CategoryRepository categoryRepository;
@@ -29,6 +31,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading Bootstrap Data");
     }
 
     private List<Recipe> getRecipes(){
