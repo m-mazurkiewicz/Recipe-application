@@ -143,17 +143,17 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.\n" +
                 "\n" +
                 "For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!");
-        guacamoleNotes.setRecipe(guacamole);
-        guacamoleNotes.setRecipe(guacamole);
+        guacamole.setNotes(guacamoleNotes);
 
-        guacamole.getIngredients().add(new Ingredient("ripe advocatos", new BigDecimal(2), eachUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(.5), teaspoonUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(1), tablespoonUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tablespoonUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoonUom,guacamole));
-        guacamole.getIngredients().add(new Ingredient("freshly grated black pepper", new BigDecimal(1),dashUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(.5), eachUom, guacamole));
+
+        guacamole.addIngredient(new Ingredient("ripe advocatos", new BigDecimal(2), eachUom));
+        guacamole.addIngredient(new Ingredient("Kosher salt", new BigDecimal(.5), teaspoonUom));
+        guacamole.addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(1), tablespoonUom));
+        guacamole.addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tablespoonUom));
+        guacamole.addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom));
+        guacamole.addIngredient(new Ingredient("cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoonUom));
+        guacamole.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(1),dashUom));
+        guacamole.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(.5), eachUom));
 
         guacamole.getCategories().add(americanCategory);
         guacamole.getCategories().add(mexicanCategory);
