@@ -161,6 +161,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         guacamole.getCategories().add(americanCategory);
         guacamole.getCategories().add(mexicanCategory);
 
+        guacamole.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacamole.setSource("Simply Recipes");
+
         recipes.add(guacamole);
 
         return recipes;
