@@ -32,11 +32,14 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Description</th>
+                                    <th>View</th>
                                 </tr>
                             </thead>
                             <tr th:each="recipe : ${recipes}">
+                                <!--/*@thymesVar id="recipe" type="mmazurkiewicz.domain.Recipe"*/-->
                                 <td th:text="${recipe.id}">123</td>
                                 <td th:text="${recipe.description}">Coś</td>
+                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
                             </tr>
                         </table>
                     </div>
