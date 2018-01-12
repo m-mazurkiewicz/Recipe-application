@@ -1,5 +1,6 @@
 package mmazurkiewicz.services;
 
+import mmazurkiewicz.commands.RecipeCommand;
 import mmazurkiewicz.converters.RecipeCommandToRecipe;
 import mmazurkiewicz.converters.RecipeToRecipeCommand;
 import mmazurkiewicz.domain.Recipe;
@@ -65,6 +66,26 @@ public class RecipesServiceImplTest {
 
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    public void getRecipeCommandByIdTest() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+        RecipeCommand commandById = recipesService.findCommandById(1L);
+
+        assertNotNull("Null recipe returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 
 }
