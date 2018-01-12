@@ -1,6 +1,8 @@
 package mmazurkiewicz.controllers;
 
+import mmazurkiewicz.commands.IngredientCommand;
 import mmazurkiewicz.commands.RecipeCommand;
+import mmazurkiewicz.services.IngredientService;
 import mmazurkiewicz.services.RecipesService;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +26,9 @@ public class IngredientControllerTest {
     @Mock
     RecipesService recipesService;
 
+    @Mock
+    IngredientService ingredientService;
+
     IngredientController ingredientController;
 
     MockMvc mockMvc;
@@ -32,7 +37,7 @@ public class IngredientControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ingredientController = new IngredientController(recipesService);
+        ingredientController = new IngredientController(recipesService, ingredientService);
         mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
     }
 
@@ -52,4 +57,18 @@ public class IngredientControllerTest {
         verify(recipesService, times(1)).findCommandById(anyLong());
     }
 
+    @Test
+    public void testShowIngredients() throws Exception{
+        //given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+
+        //when
+        when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
+
+        //then
+        mockMvc.perform(get("/recipe/1/ingredient/2/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/show"))
+                .andExpect(model().attributeExists("ingredient"));
+    }
 }
