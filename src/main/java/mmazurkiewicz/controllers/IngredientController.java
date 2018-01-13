@@ -2,6 +2,8 @@ package mmazurkiewicz.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import mmazurkiewicz.commands.IngredientCommand;
+import mmazurkiewicz.commands.RecipeCommand;
+import mmazurkiewicz.commands.UnitOfMeasureCommand;
 import mmazurkiewicz.services.IngredientService;
 import mmazurkiewicz.services.RecipesService;
 import mmazurkiewicz.services.UnitOfMeasureService;
@@ -48,6 +50,22 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
 
         model.addAttribute("unitOfMeasureList", unitOfMeasureService.listAllUnitsOfMeasure());
+        return "recipe/ingredient/ingredientForm";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model){
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("unitOfMeasureList", unitOfMeasureService.listAllUnitsOfMeasure());
+
         return "recipe/ingredient/ingredientForm";
     }
 
