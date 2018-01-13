@@ -2,6 +2,7 @@ package mmazurkiewicz.controllers;
 
 import mmazurkiewicz.commands.RecipeCommand;
 import mmazurkiewicz.domain.Recipe;
+import mmazurkiewicz.exceptions.NotFoundException;
 import mmazurkiewicz.services.RecipesService;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +53,17 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipesService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
     @Test

@@ -5,6 +5,7 @@ import mmazurkiewicz.commands.RecipeCommand;
 import mmazurkiewicz.converters.RecipeCommandToRecipe;
 import mmazurkiewicz.converters.RecipeToRecipeCommand;
 import mmazurkiewicz.domain.Recipe;
+import mmazurkiewicz.exceptions.NotFoundException;
 import mmazurkiewicz.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class RecipesServiceImpl implements RecipesService{
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()){
-            throw new RuntimeException("Recipe is not present");
+            throw new NotFoundException("Recipe is not present");
         }
 
         return recipeOptional.get();

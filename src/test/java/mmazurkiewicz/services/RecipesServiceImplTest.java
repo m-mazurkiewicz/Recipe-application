@@ -4,6 +4,7 @@ import mmazurkiewicz.commands.RecipeCommand;
 import mmazurkiewicz.converters.RecipeCommandToRecipe;
 import mmazurkiewicz.converters.RecipeToRecipeCommand;
 import mmazurkiewicz.domain.Recipe;
+import mmazurkiewicz.exceptions.NotFoundException;
 import mmazurkiewicz.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +67,16 @@ public class RecipesServiceImplTest {
 
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTestNotFound() throws Exception{
+
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipesService.findById(1L);
     }
 
     @Test
