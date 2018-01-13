@@ -47,7 +47,7 @@ public class UnitOfMeasureServiceImplTest {
         when(unitOfMeasureRepository.findAll()).thenReturn(unitOfMeasures);
 
         //when
-        Set<UnitOfMeasureCommand> commands = service.listAllUoms();
+        Set<UnitOfMeasureCommand> commands = service.listAllUnitsOfMeasure();
 
         //then
         assertEquals(2, commands.size());

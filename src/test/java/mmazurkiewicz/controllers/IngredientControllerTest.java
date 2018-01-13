@@ -82,7 +82,7 @@ public class IngredientControllerTest {
 
         //when
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        when(unitOfMeasureService.listAllUnitsOfMeasure()).thenReturn(new HashSet<>());
 
         //then
         mockMvc.perform(get("/recipe/1/ingredient/2/update"))
