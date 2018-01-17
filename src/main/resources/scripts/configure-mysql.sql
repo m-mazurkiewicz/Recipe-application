@@ -1,3 +1,4 @@
+# docker run --name mysqldb -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql
 CREATE DATABASE sfg_dev;
 CREATE DATABASE sfg_prod;
 
